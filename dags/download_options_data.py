@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 DATABRICKS_CONN_ID: str = 'databricks'
 NOTEBOOK_PATH = '/Workspace/Users/piaozhexiu@gmail.com/download options data'
 CLUSTER_SPEC = {
-    "cluster_name": "autoscaling-cluster",
     "spark_version": "15.4.x-scala2.12",
     "node_type_id": "rd-fleet.xlarge",
     "autoscale": {
