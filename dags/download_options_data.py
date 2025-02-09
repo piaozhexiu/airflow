@@ -8,8 +8,8 @@ DATABRICKS_CONN_ID = 'databricks'
 NOTEBOOK_PATH = '/Workspace/Users/piaozhexiu@gmail.com/download options data'
 CLUSTER_SPEC = {
     "cluster_name": "autoscaling-cluster",
-    "spark_version": "14.3.x-scala2.12",
-    "node_type_id": "m6.xlarge",
+    "spark_version": "15.4.x-scala2.12",
+    "node_type_id": "rd-fleet.xlarge",
     "autoscale": {
         "min_workers": 2,
         "max_workers": 8
