@@ -7,26 +7,19 @@ from datetime import datetime, timedelta
 DATABRICKS_CONN_ID = 'databricks'
 NOTEBOOK_PATH = '/Workspace/Users/piaozhexiu@gmail.com/download options data'
 CLUSTER_SPEC = {
+    "cluster_name": "autoscaling-cluster",
+    "spark_version": "14.3.x-scala2.12",
+    "node_type_id": "m6.xlarge",
     "autoscale": {
-        "max_workers": 8,
-        "min_workers": 2
+        "min_workers": 2,
+        "max_workers": 8
     },
-    "autotermination_minutes": 60,
     "aws_attributes": {
-        "availability": "SPOT_WITH_FALLBACK",
-        "ebs_volume_count": 0,
         "first_on_demand": 1,
+        "availability": "SPOT_WITH_FALLBACK",
+        "zone_id": "auto",
         "spot_bid_price_percent": 100,
-        "zone_id": "auto"
-    },
-    "cluster_name": "Transient Cluster For Airflow",
-    "data_security_mode": "SINGLE_USER",
-    "enable_elastic_disk": True,
-    "node_type_id": "rd-fleet.xlarge",
-    "runtime_engine": "PHOTON",
-    "single_user_name": "piaozhexiu@gmail.com",
-    "spark_env_vars": {
-        "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+        "ebs_volume_count": 0
     }
 }
 
