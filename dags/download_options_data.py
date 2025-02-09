@@ -1,10 +1,10 @@
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.providers.databricks.operators.databricks import DatabricksRunNowOperator
+from airflow.providers.databricks.operators.databricks import DatabricksNotebookOperator
 from datetime import datetime, timedelta
 
 # Constants for the Databricks job
-DATABRICKS_CONN_ID = 'databricks'
+DATABRICKS_CONN_ID: str = 'databricks'
 NOTEBOOK_PATH = '/Workspace/Users/piaozhexiu@gmail.com/download options data'
 CLUSTER_SPEC = {
     "cluster_name": "autoscaling-cluster",
@@ -44,10 +44,12 @@ with DAG(
     )
 
     # Task to run the Databricks notebook
-    download_options_data = DatabricksRunNowOperator(
+    download_options_data = DatabricksNotebookOperator(
         task_id='download_options_data',
         databricks_conn_id=DATABRICKS_CONN_ID,
-        new_cluster=CLUSTER_SPEC
+        notebook_path=NOTEBOOK_PATH,
+        new_cluster=CLUSTER_SPEC,
+        source='WORKSPACE'
     )
 
     # End marker
