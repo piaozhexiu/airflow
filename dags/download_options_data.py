@@ -57,4 +57,4 @@ with DAG(
     )
 
 # Setting up the task pipeline
-start << download_options_data << end
+start >> download_options_data >> end
