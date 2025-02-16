@@ -24,7 +24,7 @@ CLUSTER_SPEC = {
 
 # DAG definition
 with DAG(
-        'databricks_notebook_invocation',
+        'download_options_data',
         default_args={
             'owner': 'cheolsoo',
             'start_date': datetime(2025, 2, 9),
@@ -33,7 +33,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
         },
-        description='A DAG to invoke a Databricks notebook',
+        description='A DAG to download options data',
         schedule_interval='30 21 * * *',  # 9:30 PM UTC
         catchup=False,
 ) as dag:
