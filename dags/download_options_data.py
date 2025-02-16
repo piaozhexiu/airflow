@@ -34,7 +34,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5),
         },
         description='A DAG to invoke a Databricks notebook',
-        schedule_interval='@daily',
+        schedule_interval='30 21 * * *',  # 9:30 PM UTC
         catchup=False,
 ) as dag:
     # Start marker
