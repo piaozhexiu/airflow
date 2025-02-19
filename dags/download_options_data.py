@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.databricks.operators.databricks import DatabricksNotebookOperator
+from airflow.providers.databricks.operators.databricks_sql import DatabricksSqlOperator
 from datetime import datetime, timedelta
 
 # Constants for the Databricks job
@@ -42,7 +43,20 @@ with DAG(
         task_id='start'
     )
 
-    # Task to run the Databricks notebook
+    extract_text_from_tweets = DatabricksSqlOperator(
+        task_id='extract_text_from_tweets',
+        databricks_conn_id=DATABRICKS_CONN_ID,
+        sql_endpoint_name='/sql/1.0/warehouses/5197b380549d8b03',
+        sql='../sql/tickers_text.sql'
+    )
+
+    extract_tickers_from_text = DatabricksSqlOperator(
+        task_id='extract_tickers_from_text',
+        databricks_conn_id=DATABRICKS_CONN_ID,
+        sql_endpoint_name='/sql/1.0/warehouses/5197b380549d8b03',
+        sql='../sql/tickers_from_tweets.sql'
+    )
+
     download_options_data = DatabricksNotebookOperator(
         task_id='download_options_data',
         databricks_conn_id=DATABRICKS_CONN_ID,
@@ -57,4 +71,4 @@ with DAG(
     )
 
 # Setting up the task pipeline
-start >> download_options_data >> end
+start >> extract_text_from_tweets >> extract_tickers_from_text >> download_options_data >> end
