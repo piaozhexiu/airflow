@@ -47,14 +47,14 @@ with DAG(
         task_id='extract_text_from_tweets',
         databricks_conn_id=DATABRICKS_CONN_ID,
         sql_endpoint_name='/sql/1.0/warehouses/5197b380549d8b03',
-        sql='../sql/tickers_text.sql'
+        sql='./sql/tickers_text.sql'
     )
 
     extract_tickers_from_text = DatabricksSqlOperator(
         task_id='extract_tickers_from_text',
         databricks_conn_id=DATABRICKS_CONN_ID,
         sql_endpoint_name='/sql/1.0/warehouses/5197b380549d8b03',
-        sql='../sql/tickers_from_tweets.sql'
+        sql='./sql/tickers_from_tweets.sql'
     )
 
     download_options_data = DatabricksNotebookOperator(
