@@ -1,3 +1,4 @@
+INSERT INTO fast_campus.default.tweet_text
 SELECT
   date,
   hour,

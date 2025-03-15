@@ -1,3 +1,4 @@
+INSERT INTO fast_campus.default.tickers_from_tweets
 SELECT
     date,
     hour,
